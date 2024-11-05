@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health and Sustainability Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        h1, h2 {
+            color: #2b7a78;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 5px 0;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #2b7a78;
+            color: #ffffff;
+            padding: 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+        .results {
+            margin-top: 20px;
+            padding: 10px;
+            background: #def2f1;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Health and Sustainability Dashboard</h1>
+
+    <!-- Health Metrics Section -->
+    <div class="section">
+        <h2>Health Metrics</h2>
+        <label for="water">Water Intake (cups):</label>
+        <input type="number" id="water" placeholder="e.g., 8">
+
+        <label for="exercise">Exercise (minutes):</label>
+        <input type="number" id="exercise" placeholder="e.g., 30">
+
+        <label for="diet">Healthy Meals per Day:</label>
+        <input type="number" id="diet" placeholder="e.g., 3">
+    </div>
+
+    <!-- Sustainability Goals Section -->
+    <div class="section">
+        <h2>Sustainability Goals</h2>
+        <label for="recycle">Recycling (items per day):</label>
+        <input type="number" id="recycle" placeholder="e.g., 5">
+
+        <label for="waste">Waste Reduction (kg):</label>
+        <input type="number" id="waste" placeholder="e.g., 1">
+
+        <label for="energy">Energy Saved (kWh):</label>
+        <input type="number" id="energy" placeholder="e.g., 2">
+    </div>
+
+    <button onclick="calculateProgress()">Calculate My Progress</button>
+
+    <!-- Results Section -->
+    <div class="results" id="results">
+        <h2>Your Progress</h2>
+        <p id="healthResult"></p>
+        <p id="sustainabilityResult"></p>
+        <p id="recommendation"></p>
+    </div>
+</div>
+
+<script>
+    function calculateProgress() {
+        // Collect health data
+        const water = parseInt(document.getElementById('water').value) || 0;
+        const exercise = parseInt(document.getElementById('exercise').value) || 0;
+        const diet = parseInt(document.getElementById('diet').value) || 0;
+
+        // Collect sustainability data
+        const recycle = parseInt(document.getElementById('recycle').value) || 0;
+        const waste = parseFloat(document.getElementById('waste').value) || 0;
+        const energy = parseFloat(document.getElementById('energy').value) || 0;
+
+        // Health progress
+        const healthScore = (water / 8) * 0.3 + (exercise / 30) * 0.3 + (diet / 3) * 0.4;
+        const healthMessage = `Your health score is ${(healthScore * 100).toFixed(1)}%. Keep up the good work!`;
+
+        // Sustainability progress
+        const sustainabilityScore = (recycle / 5) * 0.3 + (waste / 1) * 0.4 + (energy / 2) * 0.3;
+        const sustainabilityMessage = `Your sustainability score is ${(sustainabilityScore * 100).toFixed(1)}%. Amazing effort!`;
+
+        // Recommendations
+        let recommendation = "Keep setting and achieving your goals!";
+        if (healthScore < 0.7) {
+            recommendation = "Consider improving your health by increasing water intake, exercising, and eating balanced meals.";
+        }
+        if (sustainabilityScore < 0.7) {
+            recommendation = "Consider enhancing your sustainability actions, like recycling more and reducing waste.";
+        }
+
+        // Update the results section
+        document.getElementById('healthResult').innerText = healthMessage;
+        document.getElementById('sustainabilityResult').innerText = sustainabilityMessage;
+        document.getElementById('recommendation').innerText = recommendation;
+    }
+</script>
+
+</body>
+</html>
